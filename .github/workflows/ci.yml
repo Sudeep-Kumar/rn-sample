@@ -1,40 +1,25 @@
-name: CI # Name shown in GitHub Actions tab
+name: CI
 
-# ─── TRIGGER ───────────────────────────────────────────────
-# Run this workflow on every push to any branch
-# AND when a PR is opened or updated
 on:
   push:
     branches: ['*']
   pull_request:
     branches: ['*']
 
-# ─── JOBS ──────────────────────────────────────────────────
-# A job is one machine GitHub spins up for you
-# You can have multiple jobs running in parallel
 jobs:
   ci:
     name: Lint · Type Check · Test
-    runs-on: ubuntu-latest # fresh Ubuntu machine every run
+    runs-on: ubuntu-latest
 
-    # ─── STEPS ───────────────────────────────────────────────
-    # Steps run in order on the same machine
-    # If any step fails, the rest are skipped and job = ❌
     steps:
-
-      # Step 1 — copy your repo code onto the machine
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2 — install Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # Step 3 — cache node_modules
-      # If package.json hasn't changed, skip npm install entirely
-      # Saves ~1-2 minutes on every run
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
@@ -43,20 +28,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Step 4 — install dependencies (skipped if cache hit)
       - name: Install dependencies
         run: npm install
 
-      # Step 5 — run ESLint
-      # --max-warnings 0 means even warnings fail the build
+      - name: Debug files
+        run: |
+          echo "Root files:"
+          ls -la
+          echo "ESLint config:"
+          cat .eslintrc.js
+
       - name: Lint
         run: npm run lint
 
-      # Step 6 — run TypeScript type check
-      # Catches type errors without building
       - name: Type check
         run: npm run type-check
 
-      # Step 7 — run tests
       - name: Test
         run: npm test

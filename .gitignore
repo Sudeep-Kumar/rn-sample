@@ -1,0 +1,39 @@
+# Mac system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# React Native
+ios/Pods/
+android/.gradle/
+android/build/
+*.jks
+*.keystore
+
+# Environment
+.env
+.env.local
+.env.*
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code (optional — commit this if you want team to share standards)
+# .claude/

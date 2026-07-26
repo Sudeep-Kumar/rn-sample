@@ -1,0 +1,22 @@
+{
+  "name": "rn-sample",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
+    "type-check": "tsc --noEmit",
+    "test": "jest --passWithNoTests"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-native": "0.73.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-native": "^0.73.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  }
+}
